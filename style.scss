@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .desktopImg{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    .navbarBottom{
+        height: 8vh;
+        width: 100vw;
+        background-color: transparent;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        bottom: 0;
+
+        .windowImg,.fileImg,.chromeImg,.edgeImg,.storeImg{
+            height: 50px;
+            width: 50px;
+
+            img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                cursor: pointer;
+            }
+        }
+    }
+
+    #customMenu{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:16px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        display: none;
+        position: absolute;
+        color: rgb(52, 52, 52);
+        background-color: rgb(184, 184, 184);
+        border: 1px solid rgb(117, 117, 117);
+        padding: 2px;
+        z-index: 9;
+        height: 40vh;
+        width: 16vw;
+        border-radius: 10px;
+
+        p{
+            margin: 6px 2px 0px 6px;
+            cursor: pointer;
+        }
+
+        hr{
+            margin-top: 6px;
+        }
+    }
+
+    .menu_newClicked{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:16px;
+        letter-spacing: 1px;
+        font-weight: 200;
+        display: none;
+        position: absolute;
+        color: rgb(52, 52, 52);
+        background-color: rgb(184, 184, 184);
+        border: 1px solid rgb(117, 117, 117);
+        padding: 2px;
+        z-index: 9;
+        height: 31vh;
+        width: 16vw;
+        border-radius: 10px;
+
+        p{
+            margin: 6px 2px 0px 6px;
+            cursor: pointer;
+        }
+
+        hr{
+            margin-top: 6px;
+        }
+    }
+
+    p:active{
+        scale: .98;
+    }
+
+    .folderContainer{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        pointer-events: none;
+        display: flex;
+        justify-content: flex-start;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        div{
+            height: 50px;
+            width: 50px;
+
+            img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            p{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: .8rem;
+                text-align: center;
+                margin-top: -4px;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .wallpaperContainer{
+        display: none;
+        height: 70%;
+        width: 70%;
+        background-color: rgb(187, 159, 213);
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 10px;
+        // display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 15px;
+
+        h2{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .top{
+            height: 45%;
+            width: 100%;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            overflow: hidden;
+            
+
+            img{
+                height: 100%;
+                width: 50%;
+                transition: all 1s ease;
+                cursor: pointer;
+            }
+
+            img:hover{
+                transform: scale(1.1);
+            }
+        }
+
+        .bottom{
+            height: 45%;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            
+            img{
+                height: 100%;
+                width: 50%;
+                transition: all 1s ease;
+                cursor: pointer;
+            }
+
+            img:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+
