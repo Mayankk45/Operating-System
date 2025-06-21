@@ -7,9 +7,139 @@ const folderContainer = document.querySelector('.folderContainer')
 const changeWallpaper = document.querySelector('#changeWallpaper')
 const wallpaperContainer = document.querySelector(".wallpaperContainer")
 
+// navbar icon click
+const navbarIcons = document.querySelector(".navbarBottom").querySelectorAll('div')
+const navIconClickedModal = document.querySelector(".navIconClickedModal")
+navbarIcons.forEach((icon) => {
+    icon.addEventListener('click',function(e){
+        let p = navIconClickedModal.querySelector("p")
+
+        if (e.target.name === "chrome") {
+            navIconClickedModal.innerHTML = getChromeDummy()
+            navIconClickedModal.style.backgroundColor = "rgb(57, 56, 58)"
+        } else if (e.target.name === "file") {
+            navIconClickedModal.innerHTML = getFileDummy()
+            navIconClickedModal.style.backgroundColor = "white"
+        } else if (e.target.name === "edge") {
+            navIconClickedModal.innerHTML = getEdgeDummy()
+            navIconClickedModal.style.backgroundColor = "rgb(57, 56, 58)"
+        } else if (e.target.name === "start") {
+             navIconClickedModal.innerHTML = getStartDummy()
+             navIconClickedModal.style.backgroundColor = "rgb(173, 159, 159)"
+        } else {
+             navIconClickedModal.innerHTML = getStoreDummy()
+             navIconClickedModal.style.backgroundColor = "rgb(181, 112, 181)"
+        }
+        navIconClickedModal.style.display = "flex"
+
+        // close modal
+        const closeIcon = document.querySelector(".closeIcon")
+        closeIcon.addEventListener('click',function(){
+        navIconClickedModal.style.display = 'none'
+        })
+    })
+})
+
+function getChromeDummy() {
+    return `
+        <div class="closeIcon">
+            <p>close</p>
+        </div>
+        <div class="chrome-browser-dummy">
+            <div class="top-bar">
+                <div class="circle red"></div>
+                <div class="circle yellow"></div>
+                <div class="circle green"></div>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Google or type a URL" disabled />
+            </div>
+        </div>
+    `;
+}
+
+function getEdgeDummy() {   
+    return `
+        <div class="closeIcon">
+            <p>close</p>
+        </div>
+        <div class="edge-browser-dummy">
+            <div class="top-bar">
+                <div class="circle red"></div>
+                <div class="circle yellow"></div>
+                <div class="circle green"></div>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search with Bing or enter address" disabled />
+            </div>
+        </div>
+    `;
+}
+
+function getStartDummy() {
+    return `
+         <div class="closeIcon">
+            <p>close</p>
+        </div>
+        <div class="start-menu-dummy">
+            <h2>Start Menu</h2>
+            <div class="menu-grid">
+                <div class="tile">Mail</div>
+                <div class="tile">Calendar</div>
+                <div class="tile">Photos</div>
+                <div class="tile">Settings</div>
+            </div>
+        </div>
+    `;
+}
+
+function getStoreDummy() {
+    return `
+        <div class="closeIcon">
+            <p>close</p>
+        </div>
+        <div class="store-dummy">
+            <h2>Microsoft Store</h2>
+            <div class="store-items">
+                <div class="item">App 1</div>
+                <div class="item">App 2</div>
+                <div class="item">App 3</div>
+            </div>
+        </div>
+    `;
+}
+
+function getFileDummy() {
+    return `
+        <div class="closeIcon">
+            <p>close</p>
+        </div>
+        <div class="file-dummy">
+            <div class="top-bar">
+                <div class="circle red"></div>
+                <div class="circle yellow"></div>
+                <div class="circle green"></div>
+            </div>
+            <div class="file-content">
+                <div class="sidebar">
+                    <p>Quick Access</p>
+                    <p>Desktop</p>
+                    <p>Documents</p>
+                    <p>Downloads</p>
+                </div>
+                <div class="main-view">
+                    <div class="file-item">📄 File1.txt</div>
+                    <div class="file-item">📁 FolderA</div>
+                    <div class="file-item">📄 Report.pdf</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// right click functionality
 let customMenu_posY = 0
 let customMenu_posX = 0
-// right click functionality
 desktopImg.addEventListener("contextmenu", function (e) {
     e.preventDefault();
 
@@ -23,10 +153,14 @@ desktopImg.addEventListener("contextmenu", function (e) {
 
 // hiding custom_menu
 window.addEventListener("click",function(e){
-    if(!customMenu.contains(e.target) && !menu_newClicked.contains(e.target) && !wallpaperContainer.contains(e.target)){
-        customMenu.style.display = "none"
-        menu_newClicked.style.display = "none"
-        wallpaperContainer.style.display = 'none'
+    if (
+        !customMenu.contains(e.target) &&
+        !menu_newClicked.contains(e.target) &&
+        !wallpaperContainer.contains(e.target) 
+    ) {
+        customMenu.style.display = "none";
+        menu_newClicked.style.display = "none";
+        wallpaperContainer.style.display = "none";
     }
 })
 
@@ -75,7 +209,6 @@ createFolder.addEventListener("click", function () {
 
 // folder drag functionality
 function dragFolder(folder) {
-    let isDragging = false;
     let offsetX = 0;
     let offsetY = 0;
 
@@ -84,7 +217,6 @@ function dragFolder(folder) {
         offsetY = e.clientY - folder.offsetTop;
 
         folder.style.cursor = 'grabbing';
-
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
     });
@@ -103,7 +235,6 @@ function dragFolder(folder) {
         document.removeEventListener('mouseup', onMouseUp);
     }
 }
-
 
 // update wallpaper
 changeWallpaper.addEventListener('click',function(){

@@ -49,6 +49,224 @@ main .navbarBottom .windowImg img, main .navbarBottom .fileImg img, main .navbar
      object-fit: cover;
   cursor: pointer;
 }
+main .navbarBottom .windowImg img:active, main .navbarBottom .fileImg img:active, main .navbarBottom .chromeImg img:active, main .navbarBottom .edgeImg img:active, main .navbarBottom .storeImg img:active {
+  scale: 0.96;
+}
+main .navIconClickedModal {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: Arial, Helvetica, sans-serif;
+}
+main .navIconClickedModal p {
+  margin-top: 4rem;
+  font-size: 2rem;
+  color: #333;
+}
+main .navIconClickedModal .closeIcon {
+  position: absolute;
+  height: 40px;
+  width: 60px;
+  top: 0;
+  right: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background-color: tomato;
+  transition: background-color 0.3s ease;
+}
+main .navIconClickedModal .closeIcon p {
+  margin: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+main .navIconClickedModal .closeIcon:hover {
+  background-color: darkred;
+}
+main .navIconClickedModal .chrome-browser-dummy,
+main .navIconClickedModal .edge-browser-dummy {
+  width: 500px;
+  height: 300px;
+  background-color: #f1f3f4;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+main .navIconClickedModal .chrome-browser-dummy .top-bar,
+main .navIconClickedModal .edge-browser-dummy .top-bar {
+  height: 36px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+main .navIconClickedModal .chrome-browser-dummy .top-bar .circle,
+main .navIconClickedModal .edge-browser-dummy .top-bar .circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+main .navIconClickedModal .chrome-browser-dummy .top-bar .red,
+main .navIconClickedModal .edge-browser-dummy .top-bar .red {
+  background-color: #ea4335;
+}
+main .navIconClickedModal .chrome-browser-dummy .top-bar .yellow,
+main .navIconClickedModal .edge-browser-dummy .top-bar .yellow {
+  background-color: #fbbc05;
+}
+main .navIconClickedModal .chrome-browser-dummy .top-bar .green,
+main .navIconClickedModal .edge-browser-dummy .top-bar .green {
+  background-color: #34a853;
+}
+main .navIconClickedModal .chrome-browser-dummy .search-bar,
+main .navIconClickedModal .edge-browser-dummy .search-bar {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+main .navIconClickedModal .chrome-browser-dummy .search-bar input,
+main .navIconClickedModal .edge-browser-dummy .search-bar input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 24px;
+  border: none;
+  font-size: 16px;
+  background-color: white;
+  color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+main .navIconClickedModal .chrome-browser-dummy .search-bar input::-moz-placeholder, main .navIconClickedModal .edge-browser-dummy .search-bar input::-moz-placeholder {
+  color: #999;
+}
+main .navIconClickedModal .chrome-browser-dummy .search-bar input::placeholder,
+main .navIconClickedModal .edge-browser-dummy .search-bar input::placeholder {
+  color: #999;
+}
+main .navIconClickedModal .start-menu-dummy {
+  width: 500px;
+  background: #1e1e1e;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+main .navIconClickedModal .start-menu-dummy h2 {
+  margin-bottom: 1rem;
+}
+main .navIconClickedModal .start-menu-dummy .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+main .navIconClickedModal .start-menu-dummy .menu-grid .tile {
+  background-color: #3a3a3a;
+  padding: 1rem;
+  border-radius: 6px;
+}
+main .navIconClickedModal .store-dummy {
+  width: 400px;
+  background-color: #e3ecfc;
+  padding: 1rem;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+main .navIconClickedModal .store-dummy h2 {
+  margin-bottom: 1rem;
+}
+main .navIconClickedModal .store-dummy .store-items {
+  display: flex;
+  justify-content: space-around;
+}
+main .navIconClickedModal .store-dummy .store-items .item {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+main .navIconClickedModal .file-dummy {
+  width: 600px;
+  height: 350px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+main .navIconClickedModal .file-dummy .top-bar {
+  height: 36px;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+main .navIconClickedModal .file-dummy .top-bar .circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+main .navIconClickedModal .file-dummy .top-bar .red {
+  background-color: #ea4335;
+}
+main .navIconClickedModal .file-dummy .top-bar .yellow {
+  background-color: #fbbc05;
+}
+main .navIconClickedModal .file-dummy .top-bar .green {
+  background-color: #34a853;
+}
+main .navIconClickedModal .file-dummy .file-content {
+  display: flex;
+  height: 100%;
+}
+main .navIconClickedModal .file-dummy .file-content .sidebar {
+  width: 30%;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  box-shadow: inset -1px 0 0 #ccc;
+}
+main .navIconClickedModal .file-dummy .file-content .sidebar p {
+  margin: 0.5rem 0;
+  color: #333;
+  font-size: 14px;
+}
+main .navIconClickedModal .file-dummy .file-content .main-view {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+main .navIconClickedModal .file-dummy .file-content .main-view .file-item {
+  background-color: #e9f0fa;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #222;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+}
 main #customMenu {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -71,6 +289,9 @@ main #customMenu p {
 }
 main #customMenu hr {
   margin-top: 6px;
+}
+main #customMenu p:active {
+  scale: 0.98;
 }
 main .menu_newClicked {
   font-family: Arial, Helvetica, sans-serif;
@@ -95,7 +316,7 @@ main .menu_newClicked p {
 main .menu_newClicked hr {
   margin-top: 6px;
 }
-main p:active {
+main .menu_newClicked p:active {
   scale: 0.98;
 }
 main .folderContainer {
