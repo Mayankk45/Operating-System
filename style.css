@@ -105,14 +105,13 @@ main .folderContainer {
   top: 0;
   z-index: 1;
   pointer-events: none;
-  display: flex;
-  justify-content: flex-start;
-  gap: 2rem;
-  flex-wrap: wrap;
 }
 main .folderContainer div {
   height: 50px;
   width: 50px;
+  pointer-events: auto;
+  cursor: pointer;
+  position: absolute;
 }
 main .folderContainer div img {
   height: 100%;

@@ -43,24 +43,67 @@ customMenu_new.addEventListener("mouseenter",function(e){
 })
 
 // creating folder dynamically
-createFolder.addEventListener("click",function(){
+let folderCount = 0;
 
-    let div = document.createElement('div')
+createFolder.addEventListener("click", function () {
+    let div = document.createElement('div');
+    div.style.position = 'absolute';
 
-    let img = document.createElement('img')
-    img.setAttribute("src","./assets/folder.png")
+    // folder should not overlap
+    const offset = folderCount * 15;
+    div.style.left = (customMenu_posX + offset) + 'px';
+    div.style.top = (customMenu_posY + offset) + 'px';
 
-    let p = document.createElement('p')
-    p.innerHTML = "New folder"
+    let img = document.createElement('img');
+    img.setAttribute("src", "./assets/folder.png");
 
-    div.appendChild(img)
-    div.appendChild(p)
-    folderContainer.appendChild(div)
+    let p = document.createElement('p');
+    p.innerHTML = "New folder";
 
-    // hide all menu
-    menu_newClicked.style.display = "none"
-    customMenu.style.display = "none"
-})
+    div.appendChild(img);
+    div.appendChild(p);
+    folderContainer.appendChild(div);
+
+    // Hide all menus
+    menu_newClicked.style.display = "none";
+    customMenu.style.display = "none";
+
+    dragFolder(div);
+
+    folderCount++; 
+});
+
+// folder drag functionality
+function dragFolder(folder) {
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    folder.addEventListener('dblclick', (e) => {
+        offsetX = e.clientX - folder.offsetLeft;
+        offsetY = e.clientY - folder.offsetTop;
+
+        folder.style.cursor = 'grabbing';
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
+
+    // runs on mouse move
+    function onMouseMove(e) {
+        folder.style.left = `${e.clientX - offsetX}px`;
+        folder.style.top = `${e.clientY - offsetY}px`;
+    }
+
+    // runs when mouse gets released
+    function onMouseUp() {
+        folder.style.cursor = 'pointer';
+
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    }
+}
+
 
 // update wallpaper
 changeWallpaper.addEventListener('click',function(){
@@ -69,26 +112,21 @@ changeWallpaper.addEventListener('click',function(){
 
 wallpaperContainer.addEventListener('dblclick',function(e){
     let bgImg = desktopImg.querySelector("img")
-    desktopImg.removeChild(bgImg)
-    let newBgImg = document.createElement('img')
     if(e.target.name == "img1"){
-        newBgImg.setAttribute("src","./assets/wallpaper1.jpg")
-        desktopImg.appendChild(newBgImg)
+        bgImg.setAttribute("src","./assets/wallpaper1.jpg")
     }
     else if(e.target.name == "img2"){
-        newBgImg.setAttribute("src","./assets/wallpaper2.jpg")
-        desktopImg.appendChild(newBgImg)
+        bgImg.setAttribute("src","./assets/wallpaper2.jpg")
     }
     else if(e.target.name == "img3"){
-        newBgImg.setAttribute("src","./assets/wallpaper3.jpg")
-        desktopImg.appendChild(newBgImg)
+        bgImg.setAttribute("src","./assets/wallpaper3.jpg")
     }
     else{
-        newBgImg.setAttribute("src","./assets/wallpaper4.jpg")
-        desktopImg.appendChild(newBgImg)
+        bgImg.setAttribute("src","./assets/wallpaper4.jpg")
     }
 
     wallpaperContainer.style.display = "none"
     customMenu.style.display = "none"
     menu_newClicked.style.display = 'none'
 })
+
