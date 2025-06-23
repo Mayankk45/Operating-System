@@ -60,7 +60,6 @@ main .navIconClickedModal {
   height: 50%;
   width: 50%;
   position: absolute;
-  z-index: 10;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -377,7 +376,7 @@ main .wallpaperContainer {
   width: 70%;
   background-color: rgb(187, 159, 213);
   position: absolute;
-  z-index: 10;
+  z-index: 20;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
