@@ -6,6 +6,7 @@ const createFolder = document.querySelector("#createFolder")
 const folderContainer = document.querySelector('.folderContainer')
 const changeWallpaper = document.querySelector('#changeWallpaper')
 const wallpaperContainer = document.querySelector(".wallpaperContainer")
+const bin = document.querySelector(".bin")
 
 // navbar icon click
 const navbarIcons = document.querySelector(".navbarBottom").querySelectorAll('div')
@@ -178,7 +179,6 @@ customMenu_new.addEventListener("mouseenter",function(e){
 
 // creating folder dynamically
 let folderCount = 0;
-
 createFolder.addEventListener("click", function () {
     let div = document.createElement('div');
     div.style.position = 'absolute';
@@ -212,11 +212,15 @@ function dragFolder(folder) {
     let offsetX = 0;
     let offsetY = 0;
 
+    // capturing folder
     folder.addEventListener('dblclick', (e) => {
+        holdFolder = true
         offsetX = e.clientX - folder.offsetLeft;
         offsetY = e.clientY - folder.offsetTop;
 
         folder.style.cursor = 'grabbing';
+        bin.style.display = 'block'
+
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
     });
@@ -225,11 +229,37 @@ function dragFolder(folder) {
     function onMouseMove(e) {
         folder.style.left = `${e.clientX - offsetX}px`;
         folder.style.top = `${e.clientY - offsetY}px`;
+
+        if(e.clientX >= 1350 && e.clientX < 1460 && e.clientY >= 550 && e.clientY < 650){
+           bin.style.animation = "pulse 1.5s infinite"
+           folder.style.opacity = ".6"
+        }
+        else{
+            folder.style.opacity = "1"
+            bin.style.animation = ""
+        }
     }
 
     // runs when mouse gets released
-    function onMouseUp() {
+    function onMouseUp(e) {
         folder.style.cursor = 'pointer';
+        
+        // removing folder 
+        const binRect = bin.getBoundingClientRect();
+        const inBin =
+            e.clientX >= binRect.left &&
+            e.clientX <= binRect.right &&
+            e.clientY >= binRect.top &&
+            e.clientY <= binRect.bottom;
+
+        if (inBin && folderContainer.contains(folder)) {
+            folderContainer.removeChild(folder);
+            bin.style.animation = "";
+        }
+
+        setTimeout(()=>{
+            bin.style.display = 'none'
+        },1000)
 
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);

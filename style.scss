@@ -338,21 +338,47 @@ main{
     }
 
     .folderContainer {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    pointer-events: none;
-
-    div {
-        height: 50px;
-        width: 50px;
-        pointer-events: auto;
-        cursor: pointer;
+        height: 100%;
+        width: 100%;
         position: absolute;
+        top: 0;
+        z-index: 11;
+        pointer-events: none;
 
-        img {
+        div {
+            height: 50px;
+            width: 50px;
+            pointer-events: auto;
+            cursor: pointer;
+            position: absolute;
+            
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            p {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 0.8rem;
+                text-align: center;
+                margin-top: -4px;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .bin{
+        display: none;
+        height: 120px;
+        width: 120px;
+        position: absolute;
+        z-index: 10;
+        bottom: 10%;
+        right: 5%;
+
+        img{
             height: 100%;
             width: 100%;
             object-fit: cover;
@@ -362,10 +388,11 @@ main{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 0.8rem;
             text-align: center;
-            margin-top: -4px;
+            background-color: tomato;
+            padding: 5px;
+            border-radius: 10px;
             white-space: nowrap;
         }
-    }
     }
 
     .wallpaperContainer{
@@ -432,4 +459,14 @@ main{
     }
 }
 
-
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

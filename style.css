@@ -324,7 +324,7 @@ main .folderContainer {
   width: 100%;
   position: absolute;
   top: 0;
-  z-index: 1;
+  z-index: 11;
   pointer-events: none;
 }
 main .folderContainer div {
@@ -345,6 +345,30 @@ main .folderContainer div p {
   font-size: 0.8rem;
   text-align: center;
   margin-top: -4px;
+  white-space: nowrap;
+}
+main .bin {
+  display: none;
+  height: 120px;
+  width: 120px;
+  position: absolute;
+  z-index: 10;
+  bottom: 10%;
+  right: 5%;
+}
+main .bin img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+main .bin p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  text-align: center;
+  background-color: tomato;
+  padding: 5px;
+  border-radius: 10px;
   white-space: nowrap;
 }
 main .wallpaperContainer {
@@ -399,4 +423,16 @@ main .wallpaperContainer .bottom img {
 }
 main .wallpaperContainer .bottom img:hover {
   transform: scale(1.1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }/*# sourceMappingURL=style.css.map */
