@@ -14,24 +14,34 @@ const navIconClickedModal = document.querySelector(".navIconClickedModal")
 navbarIcons.forEach((icon) => {
     icon.addEventListener('click',function(e){
         let p = navIconClickedModal.querySelector("p")
+        let iconClicked = false
 
         if (e.target.name === "chrome") {
             navIconClickedModal.innerHTML = getChromeDummy()
             navIconClickedModal.style.backgroundColor = "rgb(57, 56, 58)"
+            iconClicked = true
         } else if (e.target.name === "file") {
             navIconClickedModal.innerHTML = getFileDummy()
             navIconClickedModal.style.backgroundColor = "white"
+            iconClicked = true
         } else if (e.target.name === "edge") {
             navIconClickedModal.innerHTML = getEdgeDummy()
             navIconClickedModal.style.backgroundColor = "rgb(57, 56, 58)"
+            iconClicked = true
         } else if (e.target.name === "start") {
              navIconClickedModal.innerHTML = getStartDummy()
              navIconClickedModal.style.backgroundColor = "rgb(173, 159, 159)"
-        } else {
+             iconClicked = true
+        } else if (e.target.name === "store"){
              navIconClickedModal.innerHTML = getStoreDummy()
              navIconClickedModal.style.backgroundColor = "rgb(181, 112, 181)"
+             iconClicked = true
         }
-        navIconClickedModal.style.display = "flex"
+        
+        if(iconClicked){
+            navIconClickedModal.style.display = "flex"
+            calendarContainer.style.display = "none"
+        }
 
         // close modal
         const closeIcon = document.querySelector(".closeIcon")
@@ -152,16 +162,20 @@ desktopImg.addEventListener("contextmenu", function (e) {
     customMenu_posX = e.clientX
 })
 
-// hiding custom_menu
+// hiding custom_menu and modals
 window.addEventListener("click",function(e){
     if (
         !customMenu.contains(e.target) &&
         !menu_newClicked.contains(e.target) &&
-        !wallpaperContainer.contains(e.target) 
+        !wallpaperContainer.contains(e.target)
     ) {
         customMenu.style.display = "none";
         menu_newClicked.style.display = "none";
         wallpaperContainer.style.display = "none";
+    }
+
+    if(!calendarContainer.contains(e.target)){
+        calendarContainer.style.display = 'none'
     }
 })
 
@@ -220,6 +234,7 @@ function dragFolder(folder) {
 
         folder.style.cursor = 'grabbing';
         bin.style.display = 'block'
+        clock.style.display = 'none'
 
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
@@ -259,6 +274,7 @@ function dragFolder(folder) {
 
         setTimeout(()=>{
             bin.style.display = 'none'
+            clock.style.display = 'block'
         },1000)
 
         document.removeEventListener('mousemove', onMouseMove);
@@ -291,3 +307,81 @@ wallpaperContainer.addEventListener('dblclick',function(e){
     menu_newClicked.style.display = 'none'
 })
 
+
+// navbar clock functionality
+function updateClock() {
+    const timeEl = document.getElementById('time');
+    const dateEl = document.getElementById('date');
+
+    const now = new Date();
+
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const dateStr = now.toLocaleDateString(undefined, {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+
+    timeEl.textContent = timeStr;
+    dateEl.textContent = dateStr;
+}
+
+// Initial call and then update every second
+updateClock();
+setInterval(updateClock, 1000);
+
+
+// calender funcationality
+const datesContainer = document.getElementById('dates');
+const monthYear = document.getElementById('monthYear');
+var calendarContainer = document.querySelector('.calendarContainer');
+
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+function renderCalendar(month, year) {
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    monthYear.innerText = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    datesContainer.innerHTML = '';
+
+    for (let i = 0; i < firstDay; i++) {
+        datesContainer.innerHTML += `<div></div>`;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+        datesContainer.innerHTML += `<div class="date ${isToday ? 'today' : ''}">${day}</div>`;
+    }
+}
+
+function prevMonth() {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+}
+
+function nextMonth() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+}
+
+renderCalendar(currentMonth, currentYear);
+
+var clock = document.querySelector('.clockContainer')
+clock.addEventListener('click',function(e){
+    e.stopPropagation();
+    calendarContainer.style.display =
+        calendarContainer.style.display === 'block' ? 'none' : 'block';
+})
